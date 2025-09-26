@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merhaba!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff);
+            background-size: 400% 400%; /* Animasyon için arka planı büyütür */
+            
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            color: white;
+            font-family: 'Inter', sans-serif;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .center-box {
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .center-box:hover {
+            transform: scale(1.02);
+        }
+
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+        }
+
+        p {
+            font-size: 1.2rem;
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: 0;
+            min-height: 1.5em;
+        }
+        
+        .button-container {
+            display: flex;
+            gap: 20px; /* Butonlar arasına boşluk */
+            margin-top: 20px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        /* Ortak Buton Stili */
+        .cta-button {
+            display: inline-block;
+            padding: 10px 25px; /* Daha kalın butonlar */
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            flex-grow: 1; /* Esnek butonlar */
+            max-width: 150px;
+            /* Transform geçişi eklendi (boyut değişiklikleri için daha uzun süre) */
+            transition: background-color 0.3s ease, transform 0.5s ease; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Z-index, büyüyen butonun diğerini örtmesi için 10 olarak ayarlandı */
+            z-index: 10; 
+            position: relative;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* KIRMIZI Buton Stili */
+        .red-button {
+            background-color: #ff6b6b; 
+        }
+
+        .red-button:hover {
+            background-color: #e55b5b;
+        }
+
+        /* YEŞİL Buton Stili */
+        .green-button {
+            background-color: #2ecc71; 
+        }
+
+        .green-button:hover {
+            background-color: #27ae60;
+        }
+        
+        /* IFRAME Stili */
+        .reason-iframe {
+            width: 100%;
+            height: 300px; /* Form için yeterli yükseklik */
+            border: none;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* ÇIKIŞ Butonu Stili (Mavi/Cyan tonu) */
+        .exit-button {
+            background-color: #4ecdc4; /* Cyan tonu */
+            margin-top: 15px;
+            padding: 10px 30px;
+            max-width: 100%;
+            align-self: center;
+            flex-grow: 0; /* Boyutunun sabit kalmasını sağlar */
+        }
+        
+        .exit-button:hover {
+            background-color: #3baca4;
+        }
+
+        /* Mobil Cihazlar İçin Ayar (500px altı) */
+        @media (max-width: 500px) {
+            .center-box {
+                padding: 30px 20px;
+                width: 85%;
+            }
+            .button-container {
+                flex-direction: column; /* Mobil görünümde alt alta */
+                gap: 10px;
+            }
+            .cta-button {
+                max-width: 100%;
+            }
+            .reason-iframe {
+                height: 250px; /* Mobil için biraz daha az yükseklik */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="center-box">
+        <img 
+            id="profileImage"
+            src="https://media.tenor.com/lOG0hy6GUgEAAAAj/cat.gif" 
+            alt="Kedi Fotoğrafı" 
+            class="profile-image"
+        >
+        
+        <p id="mainText">Merhaba, tanışalım mı?</p>
+        
+        <div class="button-container">
+            <a href="#" id="yesButton" class="cta-button green-button">Evet</a>
+            
+            <a href="#" id="noButton" class="cta-button red-button">Hayır</a>
+        </div>
+        
+        <div id="reasonForm" style="display: none; width: 100%; flex-direction: column;">
+            <iframe 
+                class="reason-iframe"
+                src="https://forms.gle/t6pU9dMMeK6hNtGy9" 
+                frameborder="0" 
+                marginheight="0" 
+                marginwidth="0">
+                Yükleniyor...
+            </iframe>
+            
+            <a href="#" id="exitButton" class="cta-button exit-button">Çıkış Yapmak İstiyorum</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Element referansları
+            const textElement = document.getElementById('mainText');
+            const noButton = document.getElementById('noButton');
+            const yesButton = document.getElementById('yesButton');
+            const imageElement = document.getElementById('profileImage'); 
+            const buttonContainer = document.querySelector('.button-container'); 
+            const reasonForm = document.getElementById('reasonForm');
+            const exitButton = document.getElementById('exitButton');
+            
+            const phrases = [
+                "Bence tanışmalıyız.",
+                "Tanışmadan gidemezsin.",
+                "Peki o zaman, bana başka bir çare bırakmadın.",
+                "", 
+            ];
+            
+            const imageUrls = [
+                "https://media.tenor.com/_WZy7E7hoTcAAAAM/cat-smile.gif",
+                "https://media.tenor.com/p2ohOkicsrgAAAAj/cat-nope.gif",
+                "https://media.tenor.com/p-wIO64HN5cAAAAM/wake-up.gif",
+                "",
+            ];
+            
+            let clickCount = 0; 
+            // state: 'initial_prompt' -> 'typing' -> 'name_confirmation' -> 'status_prompt' -> 'reason_prompt' -> 'reason_iframe_show' -> 'finished'
+            let gameState = 'initial_prompt'; 
+            
+            const TYPING_TEXT = "Benimle tanışmak istediğini biliyordum! Merhaba ben Mustafa, ya sen? Dur tahmin edeyim, ismin Tuana mıydı?";
+            
+            let yesButtonScale = 1.0; 
+            let noButtonScale = 1.0; 
+            const YES_SCALE_INCREMENT = 28.0; 
+            const NO_SCALE_DECREMENT = 0.5; 
+            
+            /**
+             * Yazı yazma (Typewriter) efektini uygular.
+             */
+            function typeWriter(text, i, cb) {
+                if (i < text.length) {
+                    textElement.textContent += text.charAt(i);
+                    setTimeout(() => typeWriter(text, i + 1, cb), 50);
+                } else {
+                    cb();
+                }
+            }
+            
+            function endChat() {
+                textElement.textContent = "Görüşmek üzere!";
+                imageElement.src = "https://gifdb.com/images/thumbnail/crying-meme-cat-waving-paw-kjw7x1ec1djg702a.gif";
+                buttonContainer.style.display = 'none';
+                reasonForm.style.display = 'none';
+                gameState = 'finished';
+            }
+
+            if (noButton) {
+                noButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    if (gameState === 'initial_prompt') {
+                        clickCount++;
+                        
+                        if (clickCount <= phrases.length) {
+                            textElement.textContent = phrases[clickCount - 1];
+                            imageElement.src = imageUrls[clickCount - 1];
+                        }
+
+                        if (clickCount >= phrases.length) {
+                            textElement.textContent = "Yapma.";
+                            imageElement.src = "https://media.tenor.com/7D2xN_5qB3cAAAAi/crying-cat-crying.gif";
+
+                            yesButtonScale += YES_SCALE_INCREMENT;
+                            yesButton.style.transform = `scale(${yesButtonScale})`;
+                            yesButton.style.zIndex = '20'; 
+
+                            noButtonScale = Math.max(0.0, noButtonScale - NO_SCALE_DECREMENT); 
+                            noButton.style.transform = `scale(${noButtonScale})`;
+                            
+                            if (noButtonScale <= 0.01) {
+                                noButton.style.pointerEvents = 'none';
+                            }
+                        }
+                    } else if (gameState === 'name_confirmation') {
+                        textElement.textContent = "Tamam, o halde sayfayı terk etmen gerekiyor.";
+                        imageElement.src = "https://media.tenor.com/92MplgQwb80AAAAM/cat-meme-wave-emoji.gif";
+                        buttonContainer.style.display = 'none';
+                        gameState = 'finished';
+                    } else if (gameState === 'status_prompt' && noButton.textContent === 'Kötü') {
+                        textElement.textContent = "Ouw, buna gerçekten çok üzüldüm. Eğer özel bir sebebi yoksa sebebini öğrenebilir miyim?";
+                        imageElement.src = "https://media.tenor.com/CtzIdtgd52kAAAAM/remember-when.gif";
+
+                        yesButton.textContent = "Evet";
+                        noButton.textContent = "Hayır";
+                        buttonContainer.style.display = 'flex'; 
+                        
+                        gameState = 'reason_prompt';
+                    } else if (gameState === 'reason_prompt' && noButton.textContent === 'Hayır') {
+                           endChat();
+                    }
+                });
+            }
+
+            if (yesButton) {
+                yesButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    if (gameState === 'initial_prompt') {
+                        gameState = 'typing';
+                        
+                        textElement.textContent = "";
+                        buttonContainer.style.display = 'none';
+                        imageElement.src = "https://media.tenor.com/nC311LgJ7k8AAAAi/cat-typing.gif";
+
+                        yesButtonScale = 1.0;
+                        yesButton.style.transform = 'scale(1.0)';
+                        yesButton.style.zIndex = '10'; 
+                        noButtonScale = 1.0;
+                        noButton.style.transform = 'scale(1.0)';
+                        noButton.style.pointerEvents = 'auto';
+                        clickCount = 0; 
+                        
+                        typeWriter(TYPING_TEXT, 0, () => {
+                            gameState = 'name_confirmation';
+                            buttonContainer.style.display = 'flex';
+                            imageElement.src = "https://media.tenor.com/nZsn90X3OpYAAAAM/baby-cat-dancing-png.gif";
+                            textElement.textContent = TYPING_TEXT;
+                        });
+
+                    } else if (gameState === 'name_confirmation') {
+                        gameState = 'status_prompt'; 
+
+                        textElement.textContent = "Memnun oldum Tuana! Nasılsın, hayat nasıl gidiyor?";
+                        imageElement.src = "https://media.tenor.com/cqQ9eq9xIrgAAAAj/cat.gif";
+
+                        yesButton.textContent = "İyi";
+                        noButton.textContent = "Kötü";
+                    } else if (gameState === 'status_prompt') {
+                        textElement.textContent = "İyi olduğuna sevindim, bir isteğin olursa ulaşmaktan çekinme! Kendine dikkat et!";
+                        imageElement.src = "https://media.tenor.com/92MplgQwb80AAAAM/cat-meme-wave-emoji.gif";
+                        buttonContainer.style.display = 'none';
+                        gameState = 'finished';
+                    } else if (gameState === 'reason_prompt' && yesButton.textContent === 'Evet') {
+                        gameState = 'reason_iframe_show';
+
+                        textElement.textContent = "Seni dinliyorum. Lütfen neden kötü hissettiğini buraya yaz, yardımcı olabileceğim bir şey ise elimden geleni yapacağım.";
+                        imageElement.src = "https://media.tenor.com/Y3j6d3RoSEoAAAAM/sad-cat-content-aware-scale.gif";
+                        
+                        buttonContainer.style.display = 'none';
+                        reasonForm.style.display = 'flex';
+                    }
+                });
+            }
+            
+            if (exitButton) {
+                exitButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (gameState === 'reason_iframe_show') {
+                        endChat();
+                    }
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>
