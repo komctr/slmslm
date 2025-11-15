@@ -3,363 +3,343 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merhaba!</title>
+    <title>Canım Ablama Doğum Günü Kartı</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
-
+        /* --- General and Layout Styles --- */
         body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff);
-            background-size: 400% 400%; /* Animasyon için arka planı büyütür */
-            
-            animation: gradientBG 15s ease infinite;
-            min-height: 100vh;
-            
+            background: #f7a9b4; /* Soft pink background */
             display: flex;
             justify-content: center;
             align-items: center;
-            
-            color: white;
-            font-family: 'Inter', sans-serif;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            height: 100vh;
+            margin: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif; /* Keeping the playful font */
+            overflow: hidden; /* Hide overflow for confetti effect */
+        }
+
+        .dg-keki {
             text-align: center;
+            position: relative;
+            z-index: 10;
+            transition: opacity 1s ease-in-out;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .center-box {
-            width: 90%;
-            max-width: 500px;
-            padding: 40px;
-            background-color: rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            transform: scale(1);
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .center-box:hover {
-            transform: scale(1.02);
-        }
-
-        .profile-image {
-            width: 100px;
-            height: 100px;
-            border-radius: 12px;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 4px solid white;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+        h2 {
+            margin-top: 20px;
+            color: #fff;
+            text-align: center;
+            font-size: 2.5em;
         }
 
         p {
-            font-size: 1.2rem;
-            font-weight: 500;
-            line-height: 1.5;
-            margin-bottom: 0;
-            min-height: 1.5em;
-        }
-        
-        .button-container {
-            display: flex;
-            gap: 20px; /* Butonlar arasına boşluk */
-            margin-top: 20px;
-            justify-content: center;
-            width: 100%;
+            color: #fff;
+            font-size: 1.2em;
+            text-align: center;
         }
 
-        /* Ortak Buton Stili */
-        .cta-button {
-            display: inline-block;
-            padding: 10px 25px; /* Daha kalın butonlar */
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: bold;
-            flex-grow: 1; /* Esnek butonlar */
-            max-width: 150px;
-            /* Transform geçişi eklendi (boyut değişiklikleri için daha uzun süre) */
-            transition: background-color 0.3s ease, transform 0.5s ease; 
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            /* Z-index, büyüyen butonun diğerini örtmesi için 10 olarak ayarlandı */
-            z-index: 10; 
+        /* --- Cake (Kek) Styles --- */
+        .kek {
+            width: 200px;
+            height: 100px;
+            background: #8b4c39; /* Chocolate brown */
+            border-radius: 25% 25% 10px 10px;
             position: relative;
+            margin: auto;
+            box-shadow: inset 0 -15px #663024;
+            /* PASTA YAVAŞLATILDI: 1s'den 2s'ye çıkarıldı */
+            transition: all 2s ease-in-out; 
+            z-index: 5; /* Z-index ayarlandı */
         }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* KIRMIZI Buton Stili */
-        .red-button {
-            background-color: #ff6b6b; 
-        }
-
-        .red-button:hover {
-            background-color: #e55b5b;
-        }
-
-        /* YEŞİL Buton Stili */
-        .green-button {
-            background-color: #2ecc71; 
-        }
-
-        .green-button:hover {
-            background-color: #27ae60;
-        }
-        
-        /* IFRAME Stili */
-        .reason-iframe {
+        .kek::before {
+            content: "";
+            position: absolute;
             width: 100%;
-            height: 300px; /* Form için yeterli yükseklik */
-            border: none;
-            border-radius: 10px;
-            margin-top: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* ÇIKIŞ Butonu Stili (Mavi/Cyan tonu) */
-        .exit-button {
-            background-color: #4ecdc4; /* Cyan tonu */
-            margin-top: 15px;
-            padding: 10px 30px;
-            max-width: 100%;
-            align-self: center;
-            flex-grow: 0; /* Boyutunun sabit kalmasını sağlar */
-        }
-        
-        .exit-button:hover {
-            background-color: #3baca4;
+            height: 40px;
+            background-color: #fff; /* White frosting */
+            border-radius: 25% 25% 50% 50%;
+            top: 0;
+            left: 0;
+            z-index: 1;
         }
 
-        /* Mobil Cihazlar İçin Ayar (500px altı) */
-        @media (max-width: 500px) {
-            .center-box {
-                padding: 30px 20px;
-                width: 85%;
+        /* --- Candle (Mum) Styles --- */
+        .mum {
+            width: 10px;
+            height: 40px;
+            background: #ff0800; /* Red candle */
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+            z-index: 2;
+            transition: opacity 0.3s; /* For extinguishing */
+        }
+
+        /* --- Flame (Ates) Styles and Flicker Animation --- */
+        .ates {
+            width: 15px;
+            height: 15px;
+            background: #ffe345; /* Yellow flame */
+            border-radius: 50%;
+            position: absolute;
+            top: -38px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flicker 0.5s infinite alternate;
+            z-index: 3;
+            box-shadow: 0 0 10px 2px rgba(255, 227, 69, 0.8);
+            transition: opacity 0.3s; /* For extinguishing */
+        }
+
+        @keyframes flicker {
+            from {
+                transform: translateX(-50%) scale(1);
+                opacity: 1;
             }
-            .button-container {
-                flex-direction: column; /* Mobil görünümde alt alta */
-                gap: 10px;
+            to {
+                transform: translateX(-50%) scale(1.2);
+                opacity: 0.7;
             }
-            .cta-button {
-                max-width: 100%;
+        }
+
+        /* --- Extinguished State (Söndürülmüş Hali) --- */
+        .extinguished .ates {
+            opacity: 0;
+        }
+
+        .extinguished .mum {
+            opacity: 0.7; /* Candle slightly darker */
+        }
+
+        /* --- Button Styles --- */
+        #blow-button {
+            width: 200px;
+            height: 70px;
+            font-size: 25px;
+            border-radius: 30px;
+            background-color: rgb(167, 222, 247);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #8cc7e0;
+            transition: all 0.2s;
+            position: absolute;
+            top: 400px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 15; /* Butonun üstte kalması için */
+        }
+
+        #blow-button:active {
+            box-shadow: 0 2px 0 #8cc7e0;
+            transform: translateX(-50%) translateY(3px);
+        }
+        
+        /* --- Confetti Styles --- */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: transparent;
+            opacity: 0;
+            pointer-events: none;
+            border-radius: 50%;
+            /* KONFETİ SÜRESİ UZATILDI: 3s'den 5s'ye çıkarıldı */
+            animation: confetti-fall 5s ease-out forwards; 
+            z-index: 20;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
             }
-            .reason-iframe {
-                height: 250px; /* Mobil için biraz daha az yükseklik */
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(1080deg); /* Daha çok dönme */
             }
+        }
+
+        /* --- Slicing Animation (Dilimleme Animasyonu) --- */
+        .slice {
+            width: 100px;
+            height: 100px;
+            background: #8b4c39;
+            border-radius: 25% 25% 10px 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* PASTA YAVAŞLATILDI: 1s'den 2s'ye çıkarıldı */
+            transition: all 2s ease-in-out; 
+            opacity: 0;
+            z-index: 5;
+        }
+        
+        .slice::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 40px;
+            background-color: #fff;
+            border-radius: 25% 25% 50% 50%;
+            top: 0;
+            left: 0;
+        }
+
+        /* Animation class to move and fade slices */
+        .sliced-and-gone .kek {
+            opacity: 0; /* Hide the main cake */
+            transform: scale(0.1); /* Ana pastanın hızla kaybolmasını sağlar */
+        }
+        
+        .sliced-and-gone .slice.left {
+            opacity: 1;
+            /* PASTA DAHA UZAĞA VE YAVAŞÇA AYRILIYOR */
+            transform: translate(-300%, -150%) rotate(-15deg) scale(0.5); 
+        }
+        
+        .sliced-and-gone .slice.right {
+            opacity: 1;
+            /* PASTA DAHA UZAĞA VE YAVAŞÇA AYRILIYOR */
+            transform: translate(200%, -150%) rotate(15deg) scale(0.5); 
+        }
+
+        /* --- Video Container Styles --- */
+        #video-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            /* VİDEO GECİKMESİ UZATILDI: 1.5s'den 3s'ye çıkarıldı (animasyonun bitişinden sonra) */
+            transition: opacity 1.5s ease-in-out 3s; 
+            max-width: 90%;
+            max-height: 90%;
+            width: 600px; /* Example size */
+            height: 350px; /* Example size */
+        }
+
+        #video-container.show {
+            opacity: 1;
+            z-index: 30;
+        }
+
+        #birthday-video {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
 <body>
-    <div class="center-box">
-        <img 
-            id="profileImage"
-            src="https://media.tenor.com/lOG0hy6GUgEAAAAj/cat.gif" 
-            alt="Kedi Fotoğrafı" 
-            class="profile-image"
-        >
-        
-        <p id="mainText">Merhaba, tanışalım mı?</p>
-        
-        <div class="button-container">
-            <a href="#" id="yesButton" class="cta-button green-button">Evet</a>
-            
-            <a href="#" id="noButton" class="cta-button red-button">Hayır</a>
+    <div class="dg-keki" id="card-content">
+        <div class="kek" id="cake">
+            <div class="mum" id="candle"></div>
+            <div class="ates" id="flame"></div>
         </div>
         
-        <div id="reasonForm" style="display: none; width: 100%; flex-direction: column;">
-            <iframe 
-                class="reason-iframe"
-                src="https://forms.gle/f2PVbF6hHRf1VQYTA" 
+        <button id="blow-button" onclick="blowOutCandle()">Üfle Bakayım (tıkla) 🌬️</button>
+        
+        <h2>İYİ Kİ DOĞDUN CANIM ABLAAAAAM!</h2>
+        <p>ablam artik 30 yasina daha yakin :/ </p>
+    </div>
+
+    <div class="slice left" id="slice-left"></div>
+    <div class="slice right" id="slice-right"></div>
+    
+    <div id="video-container">
+        <iframe id="birthday-video" 
+                src="video.mp4" 
                 frameborder="0" 
-                marginheight="0" 
-                marginwidth="0">
-                Yükleniyor...
-            </iframe>
-            
-            <a href="#" id="exitButton" class="cta-button exit-button">Çıkış Yapmak İstiyorum</a>
-        </div>
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+        </iframe>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Element referansları
-            const textElement = document.getElementById('mainText');
-            const noButton = document.getElementById('noButton');
-            const yesButton = document.getElementById('yesButton');
-            const imageElement = document.getElementById('profileImage'); 
-            const buttonContainer = document.querySelector('.button-container'); 
-            const reasonForm = document.getElementById('reasonForm');
-            const exitButton = document.getElementById('exitButton');
-            
-            const phrases = [
-                "Bence tanışmalıyız.",
-                "Tanışmadan gidemezsin.",
-                "Peki o zaman, bana başka bir çare bırakmadın.",
-                "", 
-            ];
-            
-            const imageUrls = [
-                "https://media.tenor.com/_WZy7E7hoTcAAAAM/cat-smile.gif",
-                "https://media.tenor.com/p2ohOkicsrgAAAAj/cat-nope.gif",
-                "https://media.tenor.com/p-wIO64HN5cAAAAM/wake-up.gif",
-                "",
-            ];
-            
-            let clickCount = 0; 
-            // state: 'initial_prompt' -> 'typing' -> 'name_confirmation' -> 'status_prompt' -> 'reason_prompt' -> 'reason_iframe_show' -> 'finished'
-            let gameState = 'initial_prompt'; 
-            
-            const TYPING_TEXT = "Benimle tanışmak istediğini biliyordum! Merhaba ben Mustafa, ya sen? Dur tahmin edeyim, ismin Tuana mıydı?";
-            
-            let yesButtonScale = 1.0; 
-            let noButtonScale = 1.0; 
-            const YES_SCALE_INCREMENT = 28.0; 
-            const NO_SCALE_DECREMENT = 0.5; 
-            
-            /**
-             * Yazı yazma (Typewriter) efektini uygular.
-             */
-            function typeWriter(text, i, cb) {
-                if (i < text.length) {
-                    textElement.textContent += text.charAt(i);
-                    setTimeout(() => typeWriter(text, i + 1, cb), 50);
-                } else {
-                    cb();
-                }
-            }
-            
-            function endChat() {
-                textElement.textContent = "O halde kendine dikkat et! Yapabileceğim bir şey varsa haber etmeyi unutma!";
-                imageElement.src = "https://gifdb.com/images/thumbnail/crying-meme-cat-waving-paw-kjw7x1ec1djg702a.gif";
-                buttonContainer.style.display = 'none';
-                reasonForm.style.display = 'none';
-                gameState = 'finished';
-            }
+        const cake = document.getElementById('cake');
+        const flame = document.getElementById('flame');
+        const candle = document.getElementById('candle');
+        const button = document.getElementById('blow-button');
+        const cardContent = document.getElementById('card-content');
+        const sliceLeft = document.getElementById('slice-left');
+        const sliceRight = document.getElementById('slice-right');
+        const videoContainer = document.getElementById('video-container');
 
-            if (noButton) {
-                noButton.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    if (gameState === 'initial_prompt') {
-                        clickCount++;
-                        
-                        if (clickCount <= phrases.length) {
-                            textElement.textContent = phrases[clickCount - 1];
-                            imageElement.src = imageUrls[clickCount - 1];
-                        }
+        // Function to create and launch confetti particles
+        function launchConfetti() {
+            const colors = ['#f00', '#0f0', '#00f', '#ff0', '#0ff', '#f0f', '#fff', '#ffa500'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                // Random position and size
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.top = `${-20}px`; // Start above the screen
+                confetti.style.width = `${5 + Math.random() * 10}px`;
+                confetti.style.height = `${5 + Math.random() * 10}px`;
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Random animation delay and duration for variation
+                confetti.style.animationDelay = `${Math.random() * 0.5}s`;
+                /* KONFETİ SÜRESİ UZATILDI: Maksimum 4 saniye yerine 5 saniye olacak şekilde ayarlandı */
+                confetti.style.animationDuration = `${3 + Math.random() * 2}s`; 
+                
+                document.body.appendChild(confetti);
 
-                        if (clickCount >= phrases.length) {
-                            textElement.textContent = "Yapma.";
-                            imageElement.src = "https://media.tenor.com/7D2xN_5qB3cAAAAi/crying-cat-crying.gif";
-
-                            yesButtonScale += YES_SCALE_INCREMENT;
-                            yesButton.style.transform = `scale(${yesButtonScale})`;
-                            yesButton.style.zIndex = '20'; 
-
-                            noButtonScale = Math.max(0.0, noButtonScale - NO_SCALE_DECREMENT); 
-                            noButton.style.transform = `scale(${noButtonScale})`;
-                            
-                            if (noButtonScale <= 0.01) {
-                                noButton.style.pointerEvents = 'none';
-                            }
-                        }
-                    } else if (gameState === 'name_confirmation') {
-                        textElement.textContent = "Tamam, o halde sayfayı terk etmen gerekiyor.";
-                        imageElement.src = "https://media.tenor.com/92MplgQwb80AAAAM/cat-meme-wave-emoji.gif";
-                        buttonContainer.style.display = 'none';
-                        gameState = 'finished';
-                    } else if (gameState === 'status_prompt' && noButton.textContent === 'Kötü') {
-                        textElement.textContent = "Ouw, buna gerçekten çok üzüldüm. Eğer özel bir sebebi yoksa sebebini öğrenebilir miyim?";
-                        imageElement.src = "https://media.tenor.com/CtzIdtgd52kAAAAM/remember-when.gif";
-
-                        yesButton.textContent = "Evet";
-                        noButton.textContent = "Hayır";
-                        buttonContainer.style.display = 'flex'; 
-                        
-                        gameState = 'reason_prompt';
-                    } else if (gameState === 'reason_prompt' && noButton.textContent === 'Hayır') {
-                           endChat();
-                    }
+                // Clean up confetti elements after animation
+                confetti.addEventListener('animationend', () => {
+                    confetti.remove();
                 });
             }
+        }
 
-            if (yesButton) {
-                yesButton.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    if (gameState === 'initial_prompt') {
-                        gameState = 'typing';
-                        
-                        textElement.textContent = "";
-                        buttonContainer.style.display = 'none';
-                        imageElement.src = "https://media.tenor.com/nC311LgJ7k8AAAAi/cat-typing.gif";
+        // Main function for the "blow out" action
+        function blowOutCandle() {
+            // 1. Disable button
+            button.disabled = true;
+            button.textContent = 'Üflendi! 🥳';
 
-                        yesButtonScale = 1.0;
-                        yesButton.style.transform = 'scale(1.0)';
-                        yesButton.style.zIndex = '10'; 
-                        noButtonScale = 1.0;
-                        noButton.style.transform = 'scale(1.0)';
-                        noButton.style.pointerEvents = 'auto';
-                        clickCount = 0; 
-                        
-                        typeWriter(TYPING_TEXT, 0, () => {
-                            gameState = 'name_confirmation';
-                            buttonContainer.style.display = 'flex';
-                            imageElement.src = "https://media.tenor.com/nZsn90X3OpYAAAAM/baby-cat-dancing-png.gif";
-                            textElement.textContent = TYPING_TEXT;
-                        });
+            // 2. Extinguish the candle (mum sönsün)
+            flame.style.opacity = '0';
+            candle.classList.add('extinguished');
+            cake.classList.add('extinguished');
 
-                    } else if (gameState === 'name_confirmation') {
-                        gameState = 'status_prompt'; 
+            // 3. Launch Confetti (konfetiler patlasın)
+            // Konfeti fonksiyonu çağrıldı. Konfetiler 5 saniye boyunca düşmeye devam edecek.
+            launchConfetti();
 
-                        textElement.textContent = "Memnun oldum Tuana! Nasılsın, hayat nasıl gidiyor?";
-                        imageElement.src = "https://media.tenor.com/cqQ9eq9xIrgAAAAj/cat.gif";
+            // 4. Start slicing animation (pasta dilimlere bölünsün)
+            // Gecikme 1 saniyeden 1.5 saniyeye çıkarıldı.
+            setTimeout(() => {
+                // Position and show the slices
+                sliceLeft.style.opacity = '1';
+                sliceRight.style.opacity = '1';
+                
+                // Trigger the 'sliced-and-gone' animation
+                document.body.classList.add('sliced-and-gone');
 
-                        yesButton.textContent = "İyi";
-                        noButton.textContent = "Kötü";
-                    } else if (gameState === 'status_prompt') {
-                        textElement.textContent = "İyi olduğuna sevindim, bir isteğin olursa ulaşmaktan çekinme! Kendine dikkat et!";
-                        imageElement.src = "https://media.tenor.com/92MplgQwb80AAAAM/cat-meme-wave-emoji.gif";
-                        buttonContainer.style.display = 'none';
-                        gameState = 'finished';
-                    } else if (gameState === 'reason_prompt' && yesButton.textContent === 'Evet') {
-                        gameState = 'reason_iframe_show';
+                // Move other elements slightly out of the way
+                cardContent.style.opacity = '0';
 
-                        textElement.textContent = "Seni dinliyorum. Lütfen neden kötü hissettiğini buraya yaz, yardımcı olabileceğim bir şey ise elimden geleni yapacağım.";
-                        imageElement.src = "https://media.tenor.com/Y3j6d3RoSEoAAAAM/sad-cat-content-aware-scale.gif";
-                        
-                        buttonContainer.style.display = 'none';
-                        reasonForm.style.display = 'flex';
-                    }
-                });
-            }
-            
-            if (exitButton) {
-                exitButton.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    if (gameState === 'reason_iframe_show') {
-                        endChat();
-                    }
-                });
-            }
+            }, 1500); // 1.5 saniye bekleme
 
-        });
+            // 5. Hide the cake/slices and show the video
+            // Toplam süre: 1.5s (ilk gecikme) + 2s (animasyon süresi) + 0.5s (ek bekleme) = 4000ms.
+            // Bu sayede video pastadan sonra daha sakin bir şekilde ortaya çıkacak.
+            setTimeout(() => {
+                // Hide the old content entirely
+                cardContent.style.display = 'none';
+                sliceLeft.style.display = 'none';
+                sliceRight.style.display = 'none';
+
+                // Show the video container
+                videoContainer.classList.add('show');
+            }, 4000); // 4 saniye bekleme
+        }
     </script>
 </body>
 </html>
